@@ -83,7 +83,6 @@ def generate_launch_description():
         remappings=[
             ('image', [left_name, TextSubstitution(text='/image_raw')]),
         ],
-        parameters=[{'autosize': True}],
         output='screen',
     )
 
@@ -95,7 +94,6 @@ def generate_launch_description():
         remappings=[
             ('image', [right_name, TextSubstitution(text='/image_raw')]),
         ],
-        parameters=[{'autosize': True}],
         output='screen',
     )
 
