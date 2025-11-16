@@ -1,5 +1,6 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
 # from launch_ros.actions import ComposableNodeContainer
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration, PythonExpression
@@ -11,7 +12,7 @@ def generate_launch_description():
                                                  default_value = 'decklink')
 
     camera_info_url_configuration = LaunchConfiguration('camera_info_url',
-                                                        default = 'package://gscam/examples/uncalibrated_parameters.ini')
+                                                        default = 'package://dvrk_video/calibrations')
 
     device_configuration = LaunchConfiguration('device')
     device_argument = DeclareLaunchArgument(
@@ -69,6 +70,13 @@ def generate_launch_description():
         default_value = 'False',
         choices = ['True', 'False', '0', '1'])
 
+    rectify_configuration = LaunchConfiguration('rectify')
+    rectify_argument = DeclareLaunchArgument(
+        'rectify',
+        description = 'enable image rectification (distortion correction) using camera_info',
+        default_value = 'True',
+        choices = ['True', 'False', '0', '1'])
+
     gscam_node = Node(
         package = 'gscam',
         executable = 'gscam_node',
@@ -103,6 +111,20 @@ def generate_launch_description():
         ]
         )
 
+    rectify_node = Node(
+        package='image_proc',
+        executable='rectify_node',
+        name='rectify',
+        namespace=camera_name_configuration,
+        output='screen',
+        remappings=[
+            ('image', 'image_raw'),
+            ('camera_info', 'camera_info'),
+            ('image_rect', 'image_rect'),
+        ],
+        condition=IfCondition(rectify_configuration)
+    )
+
     return LaunchDescription([
         camera_name_argument,
         device_argument,
@@ -114,5 +136,7 @@ def generate_launch_description():
         crop_right_argument,
         deinterlace_argument,
         glimagesink_argument,
-        gscam_node
+        rectify_argument,
+        gscam_node,
+        rectify_node
     ])

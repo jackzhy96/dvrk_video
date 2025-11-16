@@ -75,6 +75,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(gscam_launch),
         launch_arguments =
         {'camera_name': PythonExpression(['"', stereo_rig_name_configuration, '" + "/left"']),
+         'camera_info_url': PythonExpression(['"package://dvrk_video/calibrations/" + "', stereo_rig_name_configuration, '" + "/left.yaml"']),
          'device': left_device_configuration,
          'images_per_second': images_per_second_configuration,
          'crop_top': crop_top_configuration,
@@ -89,6 +90,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(gscam_launch),
         launch_arguments =
         {'camera_name': PythonExpression(['"', stereo_rig_name_configuration, '" + "/right"']),
+         'camera_info_url': PythonExpression(['"package://dvrk_video/calibrations/" + "', stereo_rig_name_configuration, '" + "/right.yaml"']),
          'device': right_device_configuration,
          'images_per_second': images_per_second_configuration,
          'crop_top': crop_top_configuration,

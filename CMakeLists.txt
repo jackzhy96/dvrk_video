@@ -17,6 +17,11 @@ else (catkin_FOUND)
       ros2/launch
       DESTINATION share/${PROJECT_NAME})
 
+    file (MAKE_DIRECTORY calibrations)
+    install (DIRECTORY
+      calibrations
+      DESTINATION share/${PROJECT_NAME})
+
     ament_package ()
   endif (ament_cmake_FOUND)
 
