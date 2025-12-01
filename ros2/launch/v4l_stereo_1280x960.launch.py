@@ -39,15 +39,15 @@ def generate_launch_description():
     #
     # Launch Arguments (pass‑through to the underlying stereo bringup)
     #
-    stereo_rig_name = DeclareLaunchArgument('stereo_rig_name', default_value='dvrk',
+    stereo_rig_name = DeclareLaunchArgument('stereo_rig_name', default_value='dvrk_csr',
                                             description='Top‑level namespace for the stereo rig.')
     images_per_sec  = DeclareLaunchArgument('images_per_second', default_value='0',
                                             description='FPS throttle; 0=unlimited (device default).')
     stereo_proc     = DeclareLaunchArgument('stereo_proc', default_value='False',
                                             description='Enable downstream stereo processing pipeline (rectify/disparity).')
-    left_device     = DeclareLaunchArgument('left_device', default_value='/dev/video-left',
+    left_device     = DeclareLaunchArgument('left_device', default_value='/dev/csr-left',
                                             description='Left V4L2 device path.')
-    right_device    = DeclareLaunchArgument('right_device', default_value='/dev/video-right',
+    right_device    = DeclareLaunchArgument('right_device', default_value='/dev/csr-right',
                                             description='Right V4L2 device path.')
 
     left_name  = LaunchConfiguration('left_name')
