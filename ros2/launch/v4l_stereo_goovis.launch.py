@@ -8,7 +8,7 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    stereo_rig_name = DeclareLaunchArgument('stereo_rig_name', default_value='dvrk_csr')
+    stereo_rig_name = DeclareLaunchArgument('stereo_rig_name', default_value='test')
     # Example: full resolution; you can override on CLI if needed.
     images_per_sec  = DeclareLaunchArgument('images_per_second', default_value='0')
     stereo_proc     = DeclareLaunchArgument('stereo_proc', default_value='False')
